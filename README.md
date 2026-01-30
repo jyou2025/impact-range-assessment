@@ -26,6 +26,7 @@ impact-range-assessment/
 │   │   ├── __init__.py
 │   │   └── ira.py
 │   ├── pyproject.toml
+│   ├── LICENSE 
 │   └── README.md
 |
 ├── paper_examples_python/            # validation of IRA using two synthetic datasets reported in the paper   
