@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "irapy"
+version = "0.1.0"
+description = "Impact Range Assessment (IRA): An Interpretable Sensitivity Measure for Regression Modeling"
+readme = "README.md"
+keywords = [
+    "regression",
+    "model interpretability",
+    "sensitivity analysis",
+    "machine learning",
+    "explainable ai"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Information Analysis"
+]
+license = { text = "MIT" }
+requires-python = ">=3.8"
+authors = [
+    { name = "Jihao You" },
+    { name = "Dan Tulpan" },
+    { name = "Jiaojiao Diao" },
+    { name = "Jennifer L. Ellis" }
+]
+dependencies = [
+    "numpy>=1.24.3",
+    "pandas>=1.5.3",
+    "joblib>=1.2.0"
+]
+[tool.setuptools]
+license-files = ["LICENSE*"]
+
+[project.urls]
+Homepage = "https://github.com/jyou2025/impact-range-assessment"
