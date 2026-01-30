@@ -1,7 +1,3 @@
-![PyPI](https://img.shields.io/pypi/v/irapy.svg)
-![Python](https://img.shields.io/pypi/pyversions/irapy.svg)
-![License](https://img.shields.io/pypi/l/irapy.svg)
-
 # Impact Range Assessment (IRA)
 
 ## Introduction
