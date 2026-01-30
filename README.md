@@ -1,5 +1,8 @@
-# Impact Range Assessment (IRA)
+![PyPI](https://img.shields.io/pypi/v/irapy.svg)
+![Python](https://img.shields.io/pypi/pyversions/irapy.svg)
+![License](https://img.shields.io/pypi/l/irapy.svg)
 
+# Impact Range Assessment (IRA)
 
 ## Introduction
 **Impact Range Assessment (IRA)** is designed for regression models with continuous numeric predictors and quantifies their potential impact across the predictors’ observed data ranges in data-driven models. It is model-agnostic, and applicable to both linear and nonlinear models, while partially capturing interaction effects. The method can be implemented as either a single-execution procedure, offering a fast estimation of predictor impact, or as a repeated procedure, which assesses the stability of estimates. Overall, IRA provides a simple and intuitive way to interpret and rank the impact of predictors on the response variable. 
