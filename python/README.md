@@ -22,7 +22,7 @@ Python 3.8.17 - Numpy 1.24.3, pandas 1.5.3, joblib 1.2.0
 ### Run IRA
 You can apply either a single-execution or a repeated IRA to a trained regression model using the corresponding dataset.
 ```Python
-from ira import single_ira, repeated_ira
+from irapy import single_ira, repeated_ira
 
 # single-execution IRA
 result = single_ira(input_data=X, model=trained_model)
