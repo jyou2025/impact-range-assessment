@@ -21,9 +21,9 @@ The paper describing this method has been submitted to *MethodsX*, and a preprin
 ```
 impact-range-assessment/
 ├── python/                    
-│   ├── ira/
+│   ├── irapy/
 │   │   ├── __init__.py
-│   │   └── ira.py
+│   │   └── irapy.py
 │   ├── pyproject.toml
 │   ├── LICENSE 
 │   └── README.md
