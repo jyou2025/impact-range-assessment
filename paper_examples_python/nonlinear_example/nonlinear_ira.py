@@ -1,4 +1,4 @@
-from ira import single_ira, repeated_ira
+from irapy import single_ira, repeated_ira
 import pickle
 import pandas as pd
 import numpy as np
