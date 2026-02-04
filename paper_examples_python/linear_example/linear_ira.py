@@ -77,5 +77,5 @@ print("="*60)
 print("\n--- Final Single IRA Results ---")
 print(ira_cal_result)
 
-ira_cal_result.to_csv('linear_ira_result.csv', index=False)
+ira_cal_result.to_csv(os.path.join(script_dir, "linear_ira_result.csv"), index=False)
 print(f"Single IRA results saved to 'linear_ira_result.csv'")
