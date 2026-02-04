@@ -9,7 +9,7 @@ from sklearn.linear_model import LinearRegression
 # Step 1: Setup and Load Data
 # -------------------------------
 print("\n" + "="*60)
-print("STEP 1: STEP AND LOAD DATA")
+print("STEP 1: SETUP AND LOAD DATA")
 print("="*60)
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -81,4 +81,4 @@ print(ira_cal_result)
 
 ira_result_path = os.path.join(script_dir, "linear_ira_result.csv")
 ira_cal_result.to_csv(ira_result_path, index=False)
-print(f"Single IRA results saved to '{ira_cal_result}'")
+print(f"Single IRA results saved to '{ira_result_path}'")
