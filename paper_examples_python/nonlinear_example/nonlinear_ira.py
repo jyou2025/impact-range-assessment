@@ -20,7 +20,7 @@ np.set_printoptions(suppress=True)
 # Load dataset
 data_path = os.path.join(script_dir, "nonlinear_data.csv")
 data = pd.read_csv(data_path)
-print(f"Data loaded from 'data_path' — shape: {data.shape}")
+print(f"Data loaded from '{data_path}' — shape: {data.shape}")
 
 # -------------------------------
 # Step 2: Train and Save Model
@@ -63,8 +63,8 @@ single_ira_result = ira_cal()
 print("\n--- Final IRA Result Table (Single execution) ---")
 print(single_ira_result)
 single_ira_result_path = os.path.join(script_dir,'nonlinear_ira_single.csv')
-ira_cal_result.to_csv(single_ira_result_paht, index=False)
-print(r"Single IRA results saved to 'single_ira_result_path'")
+ira_cal_result.to_csv(single_ira_result_path, index=False)
+print(f"Single IRA results saved to '{single_ira_result_path}'")
 
 # ------------------------------------------
 # Step 4: Run Repeated IRA (with CI)
@@ -85,7 +85,7 @@ def run_repeated():
             model=rf,
             n_repeats=i,
             random_state=42,
-            n_jobs=15
+            n_jobs=-1
         )
         delta_result[f'{i}'] = repeated_result['ci_upper'] - repeated_result['ci_lower']
         repeated_result = repeated_result.iloc[:, 1:].copy()
@@ -105,7 +105,7 @@ print("\n--- Final Repeated IRA Result Table ---")
 print(repeated_ira_result)
 repeated_ira_result_path = os.path.join(script_dir,'nonlinear_ira_repeated.csv')
 repeated_ira_result.to_csv(repeated_ira_result_path, index=False)
-print(r"Repeated IRA results saved to 'repeated_ira_result_path'")
+print(f"Repeated IRA results saved to '{repeated_ira_result_path}'")
 
 # ------------------------------------------
 # Step 5: Plot Average CI Width vs. Repeats
