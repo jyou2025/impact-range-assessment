@@ -1,11 +1,12 @@
-# Impact Range Assessment (IRA)
+# irapy
 
-**Impact Range Assessment (IRA)** is an interpretable sensitivity measure for regression modeling.
+**irapy** is a Python library for implementing single-execution Impact Range Assessment (IRA) and repeated IRA analyses.
 
 ## Installation
 ```bash
 pip install irapy
 ```
+
 ## Requirements
 ### irapy Requirements
 irapy depends on the following Python libraries:
@@ -15,23 +16,23 @@ irapy depends on the following Python libraries:
 
 These dependencies are installed automatically when using pip install irapy.
 
-**irapy was developed using Python 3.8, NumPy 1.24.3, and pandas 1.5.3, and has been successfully tested on Python 3.12 with NumPy 2.0.1 and pandas 2.2.3. Compatibility issues may occur when NumPy and pandas are installed in binary-incompatible combinations.**
+**irapy was developed using Python 3.8, NumPy 1.24.3, and pandas 1.5.3, and has been successfully tested on Python 3.12 with NumPy 2.0.1 and pandas 2.2.3. Compatibility issues may occur if NumPy and pandas are installed in binary-incompatible combinations.**
 
 ## Usage
-### Run IRA
+### Run irapy
 You can apply either a single-execution or a repeated IRA to a trained regression model using the corresponding dataset.
 ```Python
 from irapy import single_ira, repeated_ira
 
 # single-execution IRA
-result = single_ira(input_data=X, model=trained_model)
-print(result)
+single_ira_result = single_ira(input_data=X, model=trained_model)
+print(single_ira_result)
 
 # repeated IRA
-result_repeated = repeated_ira(input_data=X, model=trained_model, n_repeats=50)
-print(result_repeated)
+repeated_ira_result = repeated_ira(input_data=X, model=trained_model, n_repeats=50)
+print(repeated_ira_result)
 ```
-Arguments
+### Arguments
 - `input_data`: predictor pandas DataFrame (i.e., the training predictor matrix, often denoted as X_train; **use the original, unscaled predictors when a scaler is applied**); all predictors must be continuous numeric variables.
 - `model`: trained model (object with '.predict()', tested with 'scikit-learn' models) or a callable function
 - `scaler`: fitted scaler (**optional**, e.g., 'StandardScaler' / 'MinMaxScaler' in Python)  
