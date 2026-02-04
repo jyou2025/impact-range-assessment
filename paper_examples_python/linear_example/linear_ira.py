@@ -19,7 +19,7 @@ np.set_printoptions(suppress=True)
 # Load dataset
 data_path = os.path.join(script_dir, "linear_data.csv")
 data = pd.read_csv(data_path)
-print(f"Loaded dataset from 'data_path' — shape: {data.shape}")
+print(f"Loaded dataset from '{data_path}' — shape: {data.shape}")
 
 
 # -------------------------------
@@ -32,10 +32,11 @@ print("="*60)
 X_train, y_train = data.iloc[:, :-1], data.iloc[:, -1]
 model = LinearRegression().fit(X_train, y_train)
 
-with open("linear_model.pkl", "wb") as file:
+model_path = os.path.join(script_dir,"linear_model.pkl")
+with open(model_path, "wb") as file:
     pickle.dump(model, file)
 
-print(f"Model saved to 'linear_model.pkl'")
+print(f"Model saved to '{model_path}'")
 
 
 # -------------------------------
@@ -78,5 +79,6 @@ print("="*60)
 print("\n--- Final Single IRA Results ---")
 print(ira_cal_result)
 
-ira_cal_result.to_csv(os.path.join(script_dir, "linear_ira_result.csv"), index=False)
-print(f"Single IRA results saved to 'linear_ira_result.csv'")
+ira_result_path = os.path.join(script_dir, "linear_ira_result.csv")
+ira_cal_result.to_csv(ira_result_path, index=False)
+print(f"Single IRA results saved to '{ira_cal_result}'")
