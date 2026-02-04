@@ -17,7 +17,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 np.set_printoptions(suppress=True)
 
 # Load dataset
-data = pd.read_csv('linear_data.csv')
+data = pd.read_csv(os.path.join(script_dir, "linear_data.csv"))
 print(f"Loaded dataset from 'linear_data.csv' — shape: {data.shape}")
 
 
@@ -41,7 +41,7 @@ print(f"Model saved to 'linear_model.pkl'")
 # Step 3: Run IRA Calculation
 # -------------------------------
 print("\n" + "="*60)
-print("STEP 2: IRA")
+print("STEP 3: IRA (single-execution IRA)")
 print("="*60)
 
 def ira_cal():
