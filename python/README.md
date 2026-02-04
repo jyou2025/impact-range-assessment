@@ -16,7 +16,7 @@ irapy depends on the following Python libraries:
 
 These dependencies are installed automatically when using pip install irapy.
 
-**irapy was developed using Python 3.8, NumPy 1.24.3, and pandas 1.5.3, and has been tested on Python environments including Python 3.9 (NumPy 1.26, pandas 2.0) and Python 3.12 (NumPy 2.2, pandas 2.3).**
+**irapy was developed using Python 3.8 (NumPy 1.24.3, pandas 1.5.3), and has been tested on Python environments including Python 3.9 (NumPy 1.26, pandas 2.0) and Python 3.12 (NumPy 2.2, pandas 2.3). Compatibility issues may occur when NumPy and pandas are installed in binary-incompatible combinations.**
 
 ## Usage
 ### Run irapy
