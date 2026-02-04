@@ -18,8 +18,9 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 np.set_printoptions(suppress=True)
 
 # Load dataset
-data = pd.read_csv(os.path.join(script_dir, "nonlinear_data.csv"))
-print(f"Data loaded from 'nonlinear_data.csv' — shape: {data.shape}")
+data_path = os.path.join(script_dir, "nonlinear_data.csv")
+data = pd.read_csv(data_path)
+print(f"Data loaded from 'data_path' — shape: {data.shape}")
 
 # -------------------------------
 # Step 2: Train and Save Model
@@ -58,11 +59,12 @@ def ira_cal():
     result_df = pd.DataFrame(result, columns=column_name)
     return result_df
 
-ira_cal_result = ira_cal()
+single_ira_result = ira_cal()
 print("\n--- Final IRA Result Table (Single execution) ---")
-print(ira_cal_result)
-ira_cal_result.to_csv('nonlinear_ira_single.csv', index=False)
-print("Single IRA results saved to 'nonlinear_ira_single.csv'")
+print(single_ira_result)
+single_ira_result_path = os.path.join(script_dir,'nonlinear_ira_single.csv')
+ira_cal_result.to_csv(single_ira_result_paht, index=False)
+print(r"Single IRA results saved to 'single_ira_result_path'")
 
 # ------------------------------------------
 # Step 4: Run Repeated IRA (with CI)
@@ -101,8 +103,9 @@ def run_repeated():
 repeated_ira_result, ci_result = run_repeated()
 print("\n--- Final Repeated IRA Result Table ---")
 print(repeated_ira_result)
-repeated_ira_result.to_csv('nonlinear_ira_repeated.csv', index=False)
-print("Repeated IRA results saved to 'nonlinear_ira_repeated.csv'")
+repeated_ira_result_path = os.path.join(script_dir,'nonlinear_ira_repeated.csv')
+repeated_ira_result.to_csv(repeated_ira_result_path, index=False)
+print(r"Repeated IRA results saved to 'repeated_ira_result_path'")
 
 # ------------------------------------------
 # Step 5: Plot Average CI Width vs. Repeats
@@ -127,7 +130,8 @@ def plot_run():
     plt.yticks(fontsize=12)
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig('nonlinear_repeats.jpg', dpi=300)
+    figure_path = os.path.join(script_dir,'nonlinear_repeats.jpg')
+    plt.savefig(figure_path, dpi=300)
     print("Plot saved as 'nonlinear_repeats.jpg'")
 
 plot_run()
