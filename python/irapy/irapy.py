@@ -14,8 +14,7 @@ def single_ira(input_data, model, scaler=None, num_interpol=100, num_background_
                  def func(a, b):
                      y = 3 * a + 1 * b
                      return y
-    - scaler: Optional fitted scaler (e.g., StandardScaler or MinMaxScaler). Must be trained on a DataFrame with the
-              same structure as input_data. If None, no scaling is applied.
+    - scaler: Optional fitted scaler (e.g., StandardScaler or MinMaxScaler). Must be trained on a DataFrame with the same structure as input_data. If None, no scaling is applied.
     - num_interpol: Number of interpolation points between min and max of the focus predictor (default: 100).
     - num_background_samples: Number of background observations randomly drawn from the dataset. (default: 200).
     - random_state: Seed for reproducibility when method is 'random'. Integer or None (default: 42).
@@ -126,8 +125,7 @@ def repeated_ira(input_data, model, scaler=None, num_interpol=100, num_backgroun
                  def func(a, b):
                      y = 3 * a + 1 * b
                      return y
-    - scaler: Optional fitted scaler (e.g., StandardScaler or MinMaxScaler). Must be trained on a DataFrame with the
-              same structure as input_data. If None, no scaling is applied.
+    - scaler: Optional fitted scaler (e.g., StandardScaler or MinMaxScaler). Must be trained on a DataFrame with the same structure as input_data. If None, no scaling is applied.
     - num_interpol: Number of interpolation points between min and max of the focus predictor (default: 100).
     - num_background_samples: Number of background observations randomly drawn from the dataset (default: 200).
     - random_state: Seed for reproducibility (default: 42).
