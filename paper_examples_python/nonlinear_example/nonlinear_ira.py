@@ -132,6 +132,6 @@ def plot_run():
     plt.tight_layout()
     figure_path = os.path.join(script_dir,'nonlinear_repeats.jpg')
     plt.savefig(figure_path, dpi=300)
-    print("Plot saved as 'nonlinear_repeats.jpg'")
+    print(f"Plot saved as '{figure_path}'")
 
 plot_run()
