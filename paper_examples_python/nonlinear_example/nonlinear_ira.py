@@ -63,7 +63,7 @@ single_ira_result = ira_cal()
 print("\n--- Final IRA Result Table (Single execution) ---")
 print(single_ira_result)
 single_ira_result_path = os.path.join(script_dir,'nonlinear_ira_single.csv')
-ira_cal_result.to_csv(single_ira_result_path, index=False)
+single_ira_result.to_csv(single_ira_result_path, index=False)
 print(f"Single IRA results saved to '{single_ira_result_path}'")
 
 # ------------------------------------------
@@ -118,7 +118,7 @@ print("\n--- CI Result Table ---")
 print(ci_result)
 
 def plot_run():
-    x = ci_result.columns[1:]
+    x = ci_result.columns[1:].astype(int)
     y = ci_result.iloc[:, 1:].mean(axis=0)
     
     plt.figure()
