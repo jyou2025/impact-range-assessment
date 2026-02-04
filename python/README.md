@@ -7,16 +7,15 @@
 pip install irapy
 ```
 ## Requirements
-### IRA Requirements
-IRA depends on the following Python libraries:
+### irapy Requirements
+irapy depends on the following Python libraries:
 - Numpy
 - pandas
 - joblib
 
 These dependencies are installed automatically when using pip install irapy.
 
-**Tested Environment:**
-Python 3.8.17 - Numpy 1.24.3, pandas 1.5.3, joblib 1.2.0  
+**irapy was developed using Python 3.8, NumPy 1.24.3, and pandas 1.5.3, and has been successfully tested on Python 3.12 with NumPy 2.0.1 and pandas 2.2.3. Compatibility issues may occur when NumPy and pandas are installed in binary-incompatible combinations.**
 
 ## Usage
 ### Run IRA
