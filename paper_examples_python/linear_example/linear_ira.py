@@ -17,8 +17,9 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 np.set_printoptions(suppress=True)
 
 # Load dataset
-data = pd.read_csv(os.path.join(script_dir, "linear_data.csv"))
-print(f"Loaded dataset from 'linear_data.csv' — shape: {data.shape}")
+data_path = os.path.join(script_dir, "linear_data.csv")
+data = pd.read_csv(data_path)
+print(f"Loaded dataset from 'data_path' — shape: {data.shape}")
 
 
 # -------------------------------
