@@ -41,7 +41,7 @@ print(f"Model saved to 'linear_model.pkl'")
 # Step 3: Run IRA Calculation
 # -------------------------------
 print("\n" + "="*60)
-print("STEP 3: IRA (single-execution IRA)")
+print("STEP 3: SINGLE-EXECUTION IRA")
 print("="*60)
 
 def ira_cal():
