@@ -18,7 +18,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 np.set_printoptions(suppress=True)
 
 # Load dataset
-data = pd.read_csv('nonlinear_data.csv')
+data = pd.read_csv(os.path.join(script_dir, "nonlinear_data.csv"))
 print(f"Data loaded from 'nonlinear_data.csv' — shape: {data.shape}")
 
 # -------------------------------
@@ -33,7 +33,7 @@ rf = RandomForestRegressor(random_state=0).fit(X, y)
 r2 = rf.score(X, y)
 print(f"Model trained — R² score on training data: {r2:.4f}")
 
-model_path = "nonlinear_rf_model.pkl"
+model_path = os.path.join(script_dir, "nonlinear_rf_model.pkl")
 with open(model_path, "wb") as file:
     pickle.dump(rf, file)
 print(f"Model saved to '{model_path}'")
