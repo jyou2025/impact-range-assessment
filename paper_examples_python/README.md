@@ -6,8 +6,8 @@ To run the example scripts, you need additional libraries: scikit-learn, matplot
 ```bash
 pip install scikit-learn matplotlib
 ```
-**Tested Environment:**
-Python 3.8.17 - scikit-learn 1.3.0, Matplotlib 3.7.2
+
+**The examples were developed using Python 3.8 (NumPy 1.24, pandas 1.5, scikit-learn 1.3, Matplotlib 3.7), and have been tested on Python environments including Python 3.9 (NumPy 1.26, pandas 2.0, scikit-learn 1.5, Matplotlib 3.9) and Python 3.12 (NumPy 2.2, pandas 2.3, scikit-learn 1.8, Matplotlib 3.10). Compatibility issues may occur when NumPy and pandas are installed in binary-incompatible combinations.**
 
 ### Linear IRA Example
 Based on a linear regression model using the linear data, perform a single-execution IRA with different parameter settings   
