@@ -14,7 +14,7 @@ The paper describing this method has been submitted to *MethodsX*, and a preprin
 6. IRA settings including the number of interpolation points and the number of background observations may require tuning.
 
 ## Links
-#### **IRA functions in Python:** ➡️ [python](./python)
+#### **IRA functions in Python (irapy):** ➡️ [python](./python)
 #### **IRA paper examples in Python:** ➡️ [paper_examples_python](./paper_examples_python)
 
 ## Project Structure
