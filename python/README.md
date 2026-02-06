@@ -16,12 +16,12 @@ irapy depends on the following Python libraries:
 
 These dependencies are installed automatically when using pip install irapy.
 
-**irapy was developed using Python 3.8 (NumPy 1.24, pandas 1.5), and has been tested on Python environments including Python 3.9 (NumPy 1.26, pandas 2.0) and Python 3.12 (NumPy 2.2, pandas 2.3). Compatibility issues may occur when NumPy and pandas are installed in binary-incompatible combinations.**
+**irapy was developed using Python 3.8 (NumPy 1.24, pandas 1.5) and has been tested on Python environments including Python 3.9 (NumPy 1.26, pandas 2.0) and Python 3.12 (NumPy 2.2, pandas 2.3). Compatibility issues may occur when NumPy and pandas are installed in binary-incompatible combinations.**
 
 ## Usage
 ### Run irapy
 You can apply either a single-execution or a repeated IRA to a trained regression model using the corresponding dataset.
-```Python
+```python
 from irapy import single_ira, repeated_ira
 
 # single-execution IRA
