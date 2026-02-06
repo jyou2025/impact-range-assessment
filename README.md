@@ -1,3 +1,7 @@
+[![PyPI version](https://badge.fury.io/py/irapy.svg)](https://pypi.org/project/irapy/)
+[![arXiv](https://img.shields.io/badge/arXiv-2602.05239-b31b1b.svg)](https://arxiv.org/abs/2602.05239)
+
+
 # Impact Range Assessment (IRA)
 
 ## Introduction
@@ -43,16 +47,6 @@ impact-range-assessment/
 |── .gitignore
 ├── README.md               
 └── LICENSE                  
-```
-
-## Citation
-```bibtex
-@article{you2026ira,
-  title={Impact Range Assessment (IRA): An interpretable sensitivity measure for regression modeling},
-  author={You, Jihao and Tulpan, Dan and Diao, Jiaojiao and Ellis, Jennifer L.},
-  journal={arXiv preprint arXiv:2602.05239},
-  year={2026}
-}
 ```
 
 ## License
