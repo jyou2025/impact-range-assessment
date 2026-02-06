@@ -45,5 +45,15 @@ impact-range-assessment/
 └── LICENSE                  
 ```
 
+## Citation
+```bibtex
+@article{you2026ira,
+  title={Impact Range Assessment (IRA): An interpretable sensitivity measure for regression modeling},
+  author={You, Jihao and Tulpan, Dan and Diao, Jiaojiao and Ellis, Jennifer L.},
+  journal={arXiv preprint arXiv:2602.05239},
+  year={2026}
+}
+```
+
 ## License
 This project is licensed under the [MIT License](LICENSE).
