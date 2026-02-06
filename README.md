@@ -1,17 +1,17 @@
 # Impact Range Assessment (IRA)
 
 ## Introduction
-**Impact Range Assessment (IRA)** is designed for regression models with continuous numeric predictors and quantifies their potential impact across the predictors’ observed data ranges in data-driven models. It is model-agnostic, and applicable to both linear and nonlinear models, while partially capturing interaction effects. The method can be implemented as either a single-execution procedure, offering a fast estimation of predictor impact, or as a repeated procedure, which assesses the stability of estimates. Overall, IRA provides a simple and intuitive way to interpret and rank the impact of predictors on the response variable. 
-This repository includes implementation of IRA in **Python**, as well as code for examples using synthetic datasets in the paper.
+**Impact Range Assessment (IRA)** is designed for regression models with continuous numeric predictors and quantifies their potential impact across the predictors’ observed data ranges in data-driven models. It is applicable to both linear and nonlinear models, while partially capturing interaction effects. The method can be implemented either as a single-execution procedure, offering a fast estimation of predictor impact, or as a repeated procedure, which assesses the stability of the estimates. Overall, IRA provides a simple and intuitive way to interpret and rank the impact of predictors on the response variable. 
+This repository includes an implementation of IRA in **Python**, as well as examples using synthetic datasets presented in the paper.
 The paper describing this method has been submitted to *MethodsX*, and a preprint version is available on *arXiv*. Please see the preprint here: [arXiv:xxxx.xxxxx](https://arxiv.org/abs/xxxx.xxxxx)
 
 ## Scope
-1. IRA works with regression models using continuous numeric predictors. For categorical or discrete numeric predictors, IRA might be applied to the observed values rather than to interpolated ranges.
-2. IRA is suitable for regression models with direct practical interpretation outputs. Applying IRA on regressions like logistic regression (probabilistic outputs) may not have a clear practical interpretation.
-3. IRA values depend on the trained model and training data, which are not intended for extrapolation outside the predictor ranges in the training data.
+1. IRA works with regression models using continuous numeric predictors. For categorical or discrete numeric predictors, IRA may be applied to the observed values rather than interpolated ranges.
+2. IRA is suitable for regression models with outputs that have direct practical interpretations. Applying IRA to regressions like logistic regression (probabilistic outputs) may not have a clear practical interpretation.
+3. IRA values depend on the trained model and training data and are not intended for extrapolation beyond the predictor ranges in the training data.
 4. IRA values depend on the predictor ranges present in the dataset and should not be compared across datasets with different predictor distributions or ranges, even when the same model is used.
-5. IRA values should be interpreted with caution when predictors contain extreme values or when models are particularly sensitive to extreme values. In such cases, restricting the analysis to a specific region of the range (e.g., the 25th-75th percentile) may provide more interpretable results.
-6. IRA settings including the number of interpolation points and the number of background observations may require tuning.
+5. IRA values should be interpreted with caution when predictors contain extreme values or when models are particularly sensitive to extreme values. In such cases, restricting the analysis to a specific region of the range (e.g., the 25th–75th percentile) may provide more interpretable results.
+6. IRA settings, including the number of interpolation points and the number of background observations, may require tuning.
 
 ## Links
 #### **IRA functions in Python (irapy):** ➡️ [python](./python)
