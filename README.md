@@ -3,7 +3,7 @@
 ## Introduction
 **Impact Range Assessment (IRA)** is designed for regression models with continuous numeric predictors and quantifies their potential impact across the predictors’ observed data ranges in data-driven models. It is applicable to both linear and nonlinear models, while partially capturing interaction effects. The method can be implemented either as a single-execution procedure, offering a fast estimation of predictor impact, or as a repeated procedure, which assesses the stability of the estimates. Overall, IRA provides a simple and intuitive way to interpret and rank the impact of predictors on the response variable. 
 This repository includes an implementation of IRA in **Python**, as well as examples using synthetic datasets presented in the paper.
-The paper describing this method has been submitted to *MethodsX*, and a preprint version is available on *arXiv*. Please see the preprint here: [arXiv:xxxx.xxxxx](https://arxiv.org/abs/xxxx.xxxxx)
+The paper describing this method has been submitted to *MethodsX*, and a preprint version is available on *arXiv*. Please see the preprint here: [arXiv:xxxx.xxxxx](https://arxiv.org/abs/2602.05239)
 
 ## Scope
 1. IRA works with regression models using continuous numeric predictors. For categorical or discrete numeric predictors, IRA may be applied to the observed values rather than interpolated ranges.
