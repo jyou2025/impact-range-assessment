@@ -1,6 +1,6 @@
 [![PyPI version](https://badge.fury.io/py/irapy.svg)](https://pypi.org/project/irapy/)
 [![arXiv](https://img.shields.io/badge/arXiv-2602.05239-b31b1b.svg)](https://arxiv.org/abs/2602.05239)
-[![DOI](https://zenodo.org/badge/XXXX.svg)](https://doi.org/10.5281/zenodo.18675680)
+[![DOI](https://zenodo.org/badge/18675680.svg)](https://doi.org/10.5281/zenodo.18675680)
 
 
 # Impact Range Assessment (IRA)
