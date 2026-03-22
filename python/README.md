@@ -33,7 +33,7 @@ repeated_ira_result = repeated_ira(input_data=X, model=trained_model, n_repeats=
 print(repeated_ira_result)
 ```
 ### Arguments
-- `input_data`: predictor pandas DataFrame (i.e., the training predictor matrix, often denoted as X_train; **column names must be retained; use the original, unscaled predictors when a scaler is applied**); all predictors must be continuous numeric variables.
+- `input_data`: predictor pandas DataFrame (i.e., the training predictor matrix, often denoted as X_train; **column names must be retained; use the original, unscaled predictors when a scaler is applied**); all predictors must be continuous numeric variables
 - `model`: trained model (object with '.predict()', tested with 'scikit-learn' models) or a callable function
 - `scaler`: fitted scaler (**optional**, e.g., 'StandardScaler' / 'MinMaxScaler' in Python)  
 - `num_interpol`: number of interpolated points (default: 100)
