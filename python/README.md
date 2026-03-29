@@ -34,7 +34,7 @@ print(repeated_ira_result)
 ```
 ### Arguments
 - `input_data`: predictor pandas DataFrame (i.e., the training predictor matrix, often denoted as X_train; **column names must be retained; use the original, unscaled predictors when a scaler is applied**); all predictors must be continuous numeric variables
-- `model`: trained model (object with '.predict()', tested with 'scikit-learn' models) or a callable function
+- `model`: trained model (object with '.predict()', tested with 'scikit-learn' models) or a callable function; if a callable is provided, it must accept arguments positionally in the same column order as `input_data`
 - `scaler`: fitted scaler (**optional**, e.g., 'StandardScaler' / 'MinMaxScaler' in Python)  
 - `num_interpol`: number of interpolated points (default: 100)
 - `num_background_samples`: number of background observations (default: 200)
