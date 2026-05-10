@@ -87,12 +87,12 @@ def run_repeated():
             random_state=42,
             n_jobs=-1
         )
-        delta_result[f'{i}'] = repeated_result['ci_upper'] - repeated_result['ci_lower']
+        delta_result[f'{i}'] = repeated_result['ci_upper_ira'] - repeated_result['ci_lower_ira']
         repeated_result = repeated_result.iloc[:, 1:].copy()
         repeated_result = repeated_result.rename(columns={
-            "mean": f"mean_{i}",
-            "ci_lower": f"ci_lower_{i}",
-            "ci_upper": f"ci_upper_{i}"
+            "mean_ira": f"mean_{i}",
+            "ci_lower_ira": f"ci_lower_{i}",
+            "ci_upper_ira": f"ci_upper_{i}"
         })
         print(repeated_result)
         df_list.append(repeated_result)
