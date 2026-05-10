@@ -140,7 +140,7 @@ def repeated_ira(input_data, model, scaler=None, num_interpol=100, num_backgroun
     - num_interpol: Number of interpolation points between min and max of the focus predictor (default: 100).
     - num_background_samples: Number of background observations randomly drawn from the dataset (default: 200).
     - random_state: Seed for reproducibility. Integer or None (default: 42).
-    - n_repeats: Number of repeated times (default: 50).
+    - n_repeats: Number of repeated runs (default: 50).
     - n_jobs: Number of parallel jobs to run (default: 1).
               Parallel execution uses the default joblib backend. In notebook or limited-memory environments (e.g., Google Colab), large models or datasets may occasionally produce memory or temporary storage issues when n_jobs > 1.
     - sorted_output: If True, sorts the output by mean IRA values in descending order (default: False).
