@@ -9,7 +9,7 @@ def single_ira(input_data, model, scaler=None, num_interpol=100, num_background_
 
     Parameters:
     - input_data: predictor pandas DataFrame (i.e., the training predictor matrix, often denoted as X_train). When using a scaler, this must be the original predictors used to fit the scaler. All predictors must be continuous numeric.
-    - model: A model object with a .predict() method, trained on data with the same structure as input_data.
+    - model: A model object with a .predict() method, trained on data with the same structure as input_data. A `Pipeline` object can also be used to combine a scaler and prediction model. When using a `Pipeline` that already includes a scaler, leave the `scaler` argument as `None`.
              Alternatively, a callable function can be used, such as:
                  def func(a, b):
                      y = 3 * a + 1 * b
@@ -17,12 +17,15 @@ def single_ira(input_data, model, scaler=None, num_interpol=100, num_background_
     - scaler: Optional fitted scaler (e.g., StandardScaler or MinMaxScaler). Must be trained on a DataFrame with the same structure as input_data. If None, no scaling is applied.
     - num_interpol: Number of interpolation points between min and max of the focus predictor (default: 100).
     - num_background_samples: Number of background observations randomly drawn from the dataset. (default: 200).
-    - random_state: Seed for reproducibility when method is 'random'. Integer or None (default: 42).
+    - random_state: Seed for reproducibility. Integer or None (default: 42).
     - sorted_output: Whether to sort the result by IRA values in descending order (default: False).
 
     Returns:
     - A DataFrame with predictor names and their corresponding Impact Range Assessment (IRA).
     """
+    
+    if not isinstance(input_data, pd.DataFrame):
+        raise TypeError("input_data must be a pandas DataFrame.")
 
     if not isinstance(num_interpol, int) or num_interpol < 2:
         raise ValueError("num_interpol must be an integer ≥ 2.")
@@ -32,6 +35,19 @@ def single_ira(input_data, model, scaler=None, num_interpol=100, num_background_
 
     if random_state is not None and not isinstance(random_state, int):
         raise ValueError("random_state must be an integer or None.")
+
+    if not all(pd.api.types.is_numeric_dtype(input_data[col])
+               for col in input_data.columns):
+        raise ValueError(
+            "All columns in input_data must be numeric."
+        )
+    
+    if scaler is not None:
+
+        if not hasattr(scaler, "transform"):
+            raise TypeError(
+                "scaler must have a .transform() method."
+            )
 
     # Calculate descriptive statistics for training input data
     predictor_summary = input_data.describe()
@@ -54,19 +70,14 @@ def single_ira(input_data, model, scaler=None, num_interpol=100, num_background_
                 predictor_summary.loc['max', focus_predictor],
                 num_interpol)
 
-            # random sampling with seed or without seed
-            if isinstance(random_state, int):
-                background_samples = input_data.sample(n=num_background_samples, replace=True, random_state=random_state)
-            elif random_state is None:
-                background_samples = input_data.sample(n=num_background_samples, replace=True)
-            else:
-                raise ValueError("random_state must be an integer or None.")
+            # random sampling with seed or None
+            background_samples = input_data.sample(n=num_background_samples, replace=True, random_state=random_state)
 
             # Reset index for the sampled data
             background_samples = background_samples.reset_index(drop=True)
 
             # Add one index for grouping after making prediction
-            background_samples['Index'] = np.arange(num_background_samples)
+            background_samples['_ira_index'] = np.arange(num_background_samples)
 
             # Create replicates for each observation in the sampled data
             # Number of replicates is equal to the number of interpolating points for focus predictors
@@ -78,7 +89,7 @@ def single_ira(input_data, model, scaler=None, num_interpol=100, num_background_
                 **{focus_predictor: np.tile(created_predictor_values, num_background_samples)})
 
             # Excluding the added "index" column for prediction in the next step
-            x_input = observations.drop(columns=['Index'])
+            x_input = observations.drop(columns=['_ira_index'])
 
             # Use the scaler and model to predict the output, which is an array (num_interpol,)
             if hasattr(model, 'predict'):
@@ -93,7 +104,7 @@ def single_ira(input_data, model, scaler=None, num_interpol=100, num_background_
                 raise TypeError("Unsupported model type.")
 
             # Find the maximum and minimum for each sampled observation
-            grouped = observations.loc[:, ['Index', 'Prediction']].copy().groupby('Index')['Prediction']
+            grouped = observations.loc[:, ['_ira_index', 'Prediction']].copy().groupby('_ira_index')['Prediction']
             max_per_group = grouped.max()
             min_per_group = grouped.min()
 
@@ -103,11 +114,11 @@ def single_ira(input_data, model, scaler=None, num_interpol=100, num_background_
             # Save the result for the predictor
             output_range_list.append([focus_predictor, ira_values])
 
-    result = pd.DataFrame(output_range_list, columns=['predictor', 'IRA value'])
+    result = pd.DataFrame(output_range_list, columns=['predictor', 'ira_value'])
 
     if sorted_output:
         # sort the result in ascending order based on IRA values.
-        result = result.sort_values(by='IRA value', ascending=False).reset_index(drop=True)
+        result = result.sort_values(by='ira_value', ascending=False).reset_index(drop=True)
 
     # Return to the final result dataframe
     return result
@@ -120,7 +131,7 @@ def repeated_ira(input_data, model, scaler=None, num_interpol=100, num_backgroun
 
     Parameters:
     - input_data: predictor pandas DataFrame (i.e., the training predictor matrix, often denoted as X_train). When using a scaler, this must be the original predictors used to fit the scaler.
-    - model: A model object with a .predict() method, trained on data with the same structure as input_data.
+    - model: A model object with a .predict() method, trained on data with the same structure as input_data. A `Pipeline` object can also be used to combine a scaler and prediction model. When using a `Pipeline` that already includes a scaler, leave the `scaler` argument as `None`.
              Alternatively, a callable function can be used, such as:
                  def func(a, b):
                      y = 3 * a + 1 * b
@@ -128,20 +139,51 @@ def repeated_ira(input_data, model, scaler=None, num_interpol=100, num_backgroun
     - scaler: Optional fitted scaler (e.g., StandardScaler or MinMaxScaler). Must be trained on a DataFrame with the same structure as input_data. If None, no scaling is applied.
     - num_interpol: Number of interpolation points between min and max of the focus predictor (default: 100).
     - num_background_samples: Number of background observations randomly drawn from the dataset (default: 200).
-    - random_state: Seed for reproducibility (default: 42).
+    - random_state: Seed for reproducibility. Integer or None (default: 42).
     - n_repeats: Number of repeated times (default: 50).
     - n_jobs: Number of parallel jobs to run (default: 1).
+              Parallel execution uses the default joblib backend. In notebook or limited-memory environments (e.g., Google Colab), large models or datasets may occasionally produce memory or temporary storage issues when n_jobs > 1.
     - sorted_output: If True, sorts the output by mean IRA values in descending order (default: False).
 
     Returns:
     - DataFrame with predictor names, mean IRA, and 95% CI (lower, upper).
     """
 
+    if not isinstance(input_data, pd.DataFrame):
+        raise TypeError("input_data must be a pandas DataFrame.")
+
+    if not isinstance(num_interpol, int) or num_interpol < 2:
+        raise ValueError("num_interpol must be an integer ≥ 2.")
+
+    if not isinstance(num_background_samples, int) or num_background_samples <= 0:
+        raise ValueError("num_background_samples must be a positive integer.")
+
+    if random_state is not None and not isinstance(random_state, int):
+        raise ValueError("random_state must be an integer or None.")
+
+    if not all(pd.api.types.is_numeric_dtype(input_data[col])
+               for col in input_data.columns):
+        raise ValueError(
+            "All columns in input_data must be numeric."
+        )
+    
+    if scaler is not None:
+
+        if not hasattr(scaler, "transform"):
+            raise TypeError(
+                "scaler must have a .transform() method."
+            )
+
     if not isinstance(n_repeats, int) or n_repeats <= 0:
         raise ValueError("n_repeats must be a positive integer.")
 
-    if not isinstance(n_jobs, int) or n_jobs == 0:
-        raise ValueError("n_jobs must be a non-zero integer.")
+    if not isinstance(n_jobs, int):
+        raise TypeError("n_jobs must be an integer.")
+
+    if n_jobs == 0 or n_jobs < -1:
+        raise ValueError(
+            "n_jobs must be -1 or a positive integer."
+        )
                      
     # Create a list of seeds for reproducible random sampling per iteration
     seeds = [int(s) for s in np.random.RandomState(random_state).randint(0, 1_000_000, size=n_repeats)]
@@ -160,19 +202,19 @@ def repeated_ira(input_data, model, scaler=None, num_interpol=100, num_backgroun
     )
 
     # Extract IRA values and calculate CI
-    ira_array = np.array([r['IRA value'].values for r in results])
+    ira_array = np.array([r['ira_value'].values for r in results])
     mean = ira_array.mean(axis=0)
     ci_lower = np.percentile(ira_array, 2.5, axis=0)
     ci_upper = np.percentile(ira_array, 97.5, axis=0)
 
     result = pd.DataFrame({
         'predictor': input_data.columns,
-        'mean': mean,
-        'ci_lower': ci_lower,
-        'ci_upper': ci_upper
+        'mean_ira': mean,
+        'ci_lower_ira': ci_lower,
+        'ci_upper_ira': ci_upper
     })
 
     if sorted_output:
-        result = result.sort_values(by='mean', ascending=False).reset_index(drop=True)
+        result = result.sort_values(by='mean_ira', ascending=False).reset_index(drop=True)
 
     return result
