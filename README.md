@@ -6,17 +6,19 @@
 # Impact Range Assessment (IRA)
 
 ## Introduction
-**Impact Range Assessment (IRA)** is designed for regression models with continuous numeric predictors and quantifies their potential impact across the predictors’ observed data ranges in data-driven models. It is applicable to both linear and nonlinear models, while partially capturing interaction effects. The method can be implemented either as a single-execution procedure, offering a fast estimation of predictor impact, or as a repeated procedure, which assesses the stability of the estimates. Overall, IRA provides a simple and intuitive way to interpret and rank the impact of predictors on the response variable. 
-This repository includes an implementation of IRA in **Python [(irapy)](https://pypi.org/project/irapy/)**, as well as examples using synthetic datasets presented in the paper.
-The paper describing this method has been submitted to *MethodsX*, and a preprint version is available on *arXiv*. Please see the preprint here: [arXiv:2602.05239](https://arxiv.org/abs/2602.05239)
+
+**Impact Range Assessment (IRA)** is a model-agnostic sensitivity measure for fitted regression models with numeric predictors. IRA quantifies how much model predictions vary when each predictor is varied across its observed range while the remaining predictors are held at sampled background observations. IRA can be performed as either a single-execution analysis for a rapid estimate of model sensitivity or a repeated analysis that characterizes variability associated with background-observation sampling. The resulting IRA values are expressed in the same units as the model output, providing an intuitive basis for comparing and ranking the sensitivity of model predictions to individual predictors. IRA evaluates predictors using a one-at-a-time perturbation strategy and does not explicitly isolate interaction effects. This repository contains the Python implementation of IRA, available as [`irapy`](https://pypi.org/project/irapy/), and the notebooks used to reproduce the synthetic validation, benchmark analyses, interpretability comparisons, and runtime results reported in the revised manuscript. A revised version of the manuscript has been resubmitted to *MethodsX*. The latest preprint is available at [arXiv:2602.05239](https://arxiv.org/abs/2602.05239).
+
 
 ## Scope
-1. IRA works with regression models using continuous numeric predictors. For categorical or discrete numeric predictors, IRA may be applied to the observed values rather than interpolated ranges.
-2. IRA is suitable for regression models with outputs that have direct practical interpretations. Applying IRA to regressions like logistic regression (probabilistic outputs) may not have a clear practical interpretation.
-3. IRA values depend on the trained model and training data and are not intended for extrapolation beyond the predictor ranges in the training data.
-4. IRA values depend on the predictor ranges present in the dataset and should not be compared across datasets with different predictor distributions or ranges, even when the same model is used.
-5. IRA values should be interpreted with caution when predictors contain extreme values or when models are particularly sensitive to extreme values. In such cases, restricting the analysis to a specific region of the range (e.g., the 25th–75th percentile) may provide more interpretable results.
-6. IRA settings, including the number of interpolation points and the number of background observations, may require tuning.
+
+1. IRA is primarily designed for regression models with continuous numeric predictors and discrete numeric predictors for which interpolation is mathematically meaningful. Categorical predictors are not directly supported by the current implementation.
+2. IRA is suitable for regression models with outputs that have direct practical interpretations. Applying IRA to bounded outputs such as probabilities may result in values that are less straightforward to interpret in practical terms.
+3. IRA values depend on the trained model and input data and are not intended for extrapolation beyond the predictor ranges observed in the input data.
+4. IRA values depend on the predictor ranges and distributions present in the dataset and should not be compared across datasets with different predictor distributions or ranges, even when the same model is used.
+5. IRA values should be interpreted with caution when predictors contain extreme values or when models are particularly sensitive near the edges of the observed ranges. In such cases, restricting the analysis to a specific and practically relevant region of the range (e.g., the 25th–75th percentile range) may provide more interpretable results.
+6. IRA uses a one-at-a-time perturbation strategy and does not explicitly isolate multivariable interaction effects. It may also evaluate uncommon or unrealistic predictor combinations when predictors are strongly correlated.
+7. IRA settings, including the number of interpolation points, the number of background observations, and the number of repeats, may require adjustment for different datasets and regression models.
 
 ## Links
 #### **IRA functions in Python (irapy):** ➡️ [python](./python)
@@ -25,29 +27,25 @@ The paper describing this method has been submitted to *MethodsX*, and a preprin
 ## Project Structure
 ```
 impact-range-assessment/
-├── python/                    
+├── python/
 │   ├── irapy/
 │   │   ├── __init__.py
 │   │   └── irapy.py
 │   ├── pyproject.toml
-│   ├── LICENSE 
-│   └── README.md
-|
-├── paper_examples_python/            # validation of IRA using two synthetic datasets reported in the paper   
-│   ├── linear_example/               # IRA example on linear model
-|   |   ├──linear_data.csv
-|   |   ├──linear_data_summary.csv
-|   |   └──linear_ira.py
-|   |
-│   ├── nonlinear_example/            # IRA example on nonlinear model
-|   |   ├──nonlinear_data.csv
-|   |   ├──nonlinear_data_summary.csv
-|   |   └──nonlinear_ira.py            
+│   ├── LICENSE
 │   └── README.md
 │
-|── .gitignore
-├── README.md               
-└── LICENSE                  
+├── paper_examples_python/
+│   ├── synthetic_linear_example.ipynb
+│   ├── synthetic_nonlinear_example.ipynb
+│   ├── Benchmark_California_Housing_example.ipynb
+│   ├── Benchmark_Concrete_Compressive_Strength_example.ipynb
+│   ├── Runtime_comparison.ipynb
+│   └── README.md
+│
+├── .gitignore
+├── README.md
+└── LICENSE             
 ```
 
 ## License
